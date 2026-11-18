@@ -3,12 +3,12 @@
 
 /* Scelte comuni: ogni regola usa var() per richiamarne il valore. */
 :root {
-  --colore-primario: #64acc8;
-  --colore-primario-scuro: #1f466e;
+  --colore-primario: #de1eab;
+  --colore-primario-scuro: #ff6a44;
   --colore-sfondo: #f5f2e9;
-  --colore-testo: #202923;
-  --font-testo: "Poppins", sans-serif;
-  --font-titoli: "Palatino Linotype", serif;
+  --colore-testo: #202529;
+  --font-testo: "Work Sans", sans-serif;
+  --font-titoli: "Sorts Mill Goudy", serif;
 }
 
 * {
@@ -44,8 +44,18 @@ a:focus-visible {
 }
 
 .site-header {
-  padding: 1.5rem 0;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  padding: 1rem 0;
   border-bottom: 4px solid var(--colore-primario);
+  background: var(--colore-sfondo);
+}
+
+.site-header .container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
 }
 
 .brand {
@@ -65,27 +75,31 @@ a:focus-visible {
 }
 
 nav {
-  margin-top: 1rem;
-}
-
-nav a {
-  display: inline-block;
-  margin-right: 1rem;
-  padding: 0.25rem 0;
-}
-
-nav a[aria-current="page"] {
-  font-weight: bold;
-}
-
-nav {
   display: flex;
-  flex-wrap: wrap;
-  gap: 0.25rem 1rem;
+  flex-direction: column;
+  gap: 0.25rem;
+  margin-top: 0;
 }
 
 nav a {
-  margin-right: 0;
+  display: block;
+  width: fit-content;
+  padding: 0.25rem 0;
+  margin: 0;
+}
+
+@media (min-width: 600px) {
+  .site-header .container {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  nav {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 0.25rem 1rem;
+  }
 }
 .intro {
   padding: 3rem 0 1rem;
