@@ -179,10 +179,22 @@ h3 {
   margin-bottom: 0.5rem;
 }
 
-.event-grid {
+event-grid {
   display: grid;
   grid-template-columns: minmax(0, 1fr);
   gap: 1.5rem;
+}
+
+@media (min-width: 600px) {
+  .event-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 64rem) {
+  .event-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
 }
 
 .event-card {
@@ -230,6 +242,12 @@ h3 {
 
 .skip-link:focus {
   top: 1rem;
+}
+
+.event-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 1.5rem;
 }
 
 @media (min-width: 600px) {

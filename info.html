@@ -28,7 +28,16 @@
 </nav>
     </div>
   </header>
-
+<section class="content-section" aria-labelledby="titolo-meteo">
+  <h2 id="titolo-meteo">Meteo a Torino adesso</h2>
+  <p id="meteo-stato" role="status" aria-live="polite">Caricamento del meteo…</p>
+  <p class="reading-text">
+    È il meteo attuale, non una previsione per le date del festival.
+    <br>
+    Dati meteo:
+    <a href="https://open-meteo.com/">Open-Meteo, licenza CC BY 4.0</a>.
+  </p>
+</section>
   <main id="contenuto" class="container">
   <section class="content-section" aria-labelledby="titolo-galleria">
   <h2 id="titolo-galleria">Le sedi del festival</h2>
@@ -143,6 +152,41 @@
       nextSlideMessage: "Fotografia successiva"
     }
   });
+</script>
+<script>
+  const meteoStato = document.querySelector("#meteo-stato");
+  const indirizzoMeteo =
+    "https://api.open-meteo.com/v1/forecast?latitude=45.0703&longitude=7.6869&current=temperature_2m,wind_speed_10m&timezone=Europe%2FRome";
+
+  async function caricaMeteo() {
+    try {
+      const risposta = await fetch(indirizzoMeteo);
+
+      if (!risposta.ok) {
+        throw new Error("Richiesta meteo non riuscita.");
+      }
+
+      const dati = await risposta.json();
+      const attuali = dati.current;
+
+      if (
+        !attuali ||
+        attuali.temperature_2m == null ||
+        attuali.wind_speed_10m == null ||
+        !attuali.time
+      ) {
+        throw new Error("Dati meteo incompleti.");
+      }
+
+      meteoStato.textContent =
+        `${attuali.temperature_2m} °C · Vento ${attuali.wind_speed_10m} km/h · Dato delle ${attuali.time.replace("T", " ")}`;
+    } catch (errore) {
+      meteoStato.textContent = "Il meteo al momento non è disponibile.";
+      console.error(errore);
+    }
+  }
+
+  caricaMeteo();
 </script>
 </body>
 </html>
