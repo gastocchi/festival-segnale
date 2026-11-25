@@ -47,6 +47,6 @@ erDiagram
         string categoria
         string descrizione
         string immagine
-        string immagine\_alt
-        number sede\_id FK
+        string immagine_alt
+        number sede_id FK
     }
